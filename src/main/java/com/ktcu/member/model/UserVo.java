@@ -32,9 +32,9 @@ public class UserVo {
 
 	private String id;
 	private String password;
-	private String name = "???";
+	private String name = "jaeho";
 	private String phone = "010-1111-2222";
-	private String birth = "1988-11-04";
+	private String birth = "1988-11-11";
 	private int age = 30;
 	private int loginFailCnt;
 	private boolean isTobeUser;
