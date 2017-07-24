@@ -20,7 +20,7 @@ public class LoginUser extends User {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 	}
 
-	public UserVo getUserInfo(){
+	public UserVo getUserVo(){
 		return userVo;
 	};
 

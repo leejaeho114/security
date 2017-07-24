@@ -8,9 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class UserVo {
 
-	public static UserVo getUserInfo() {
+	public static UserVo getUserVo() {
 		LoginUser user = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return user.getUserInfo();
+		return user.getUserVo();
 	}
 
 	public UserVo() {}

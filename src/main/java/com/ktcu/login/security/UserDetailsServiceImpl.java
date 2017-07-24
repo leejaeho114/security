@@ -1,6 +1,8 @@
 package com.ktcu.login.security;
 
+import com.ktcu.login.domain.LoginUser;
 import com.ktcu.member.model.UserVo;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		//todo ?? ???? vo? ?? ??? ??
+		//todo DB select
 		UserVo userVO = new UserVo().getTobeUserVo();
 
 		if(!userVO.getId().equals(username)){
@@ -36,10 +38,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 			throw new UsernameNotFoundException("?? ??? ??? ???.");
 		}
 
-		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-		UserDetails user = new User(userVO.getId(), userVO.getPassword(), roles);
+		LoginUser user = new LoginUser(userVO.getId(), userVO.getPassword(), authorities);
+		user.setUserVo(userVO);
 
 		return user;
 	}
