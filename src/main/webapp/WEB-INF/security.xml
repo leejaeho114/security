@@ -22,8 +22,11 @@
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="memberService" />
+		<authentication-provider ref="authProvider" />
 	</authentication-manager>
 
+
 	<b:bean id="memberService" class="com.ktcu.login.security.UserDetailsServiceImpl" />
+	<b:bean id="authProvider" class="com.ktcu.login.security.AuthenticationProviderImpl" />
 
 </b:beans>

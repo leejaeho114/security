@@ -1,9 +1,17 @@
 package com.ktcu.member.model;
 
+import com.ktcu.login.domain.LoginUser;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 /**
  * Created by LG on 2017-07-24.
  */
 public class UserVo {
+
+	public static UserVo getUserInfo() {
+		LoginUser user = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return user.getUserInfo();
+	}
 
 	public UserVo() {}
 
