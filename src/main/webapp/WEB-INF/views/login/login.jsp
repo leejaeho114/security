@@ -34,7 +34,7 @@
 
 				<c:if test="${4 < sessionScope.loginFailCnt}">
 				<img src="<c:url value="stickyCaptcha.png" />"><br />
-				Answer: <input name="answer" /><input type="submit" />
+				Answer: <input name="captchaCode" /><input type="submit" />
 				</c:if>
 
 				<div class="btn btn-custom-primary btn-lg btn-block btn-auth"  onclick="login();"><i class="fa fa-arrow-circle-o-right"></i> Login</div>

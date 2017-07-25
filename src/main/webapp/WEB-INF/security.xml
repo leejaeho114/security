@@ -29,6 +29,8 @@
 
 
 		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login"  />
+
+		<custom-filter ref="captchaAuthFilter" before="FORM_LOGIN_FILTER" />
 	</http>
 
 	<authentication-manager>
@@ -36,7 +38,7 @@
 		<authentication-provider ref="authProvider" />
 	</authentication-manager>
 
-
+	<b:bean id="captchaAuthFilter" class="com.ktcu.login.security.filter.CaptchaAuthFilter" />
 	<!--<b:bean id="memberService" class="com.ktcu.login.security.UserDetailsServiceImpl" />-->
 	<!--<b:bean class="com.ktcu.login.security.LoginSuceessListener" />-->
 	<!--<b:bean id="authProvider" class="com.ktcu.login.security.AuthenticationProviderImpl" />-->

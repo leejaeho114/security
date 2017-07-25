@@ -47,6 +47,7 @@ public class UserVo {
 	private int loginFailCnt;
 	private boolean isTobeUser;
 	private String asisId;
+	private String chaptcha;
 
 	public String getId() {
 		return id;
@@ -118,5 +119,13 @@ public class UserVo {
 
 	public void setBirth(String birth) {
 		this.birth = birth;
+	}
+
+	public String getChaptcha() {
+		return chaptcha;
+	}
+
+	public void setChaptcha(String chaptcha) {
+		this.chaptcha = chaptcha;
 	}
 }

@@ -38,7 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		}
 
 		if(userVO.getLoginFailCnt() == 5){
-			throw new LoginFailCountException("id & password is not correct");
+			//throw new LoginFailCountException("id & password is not correct");
 		}
 
 		if(userVO.getAsisId() != null){
