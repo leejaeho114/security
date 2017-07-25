@@ -12,7 +12,9 @@
 		<security:csrf disabled="true" />
 
 		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/**.png" access="permitAll" />
+		<intercept-url pattern="/favicon.ico" access="permitAll" />
+		<intercept-url pattern="/stickyCaptcha" access="permitAll" />
+		<intercept-url pattern="/stickyCaptcha.png" access="permitAll" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
 		<form-login login-page="/login"
@@ -21,21 +23,21 @@
 					login-processing-url="/login/authenticate"
 					authentication-failure-url="/login"
 					authentication-success-handler-ref="authSuccessHandler"
-					authentication-failure-handler-ref="authFailureHandler"
-		/>
 
+		/>
+		<!--authentication-failure-handler-ref="authFailureHandler"-->
 
 
 		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login"  />
 	</http>
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="memberService" />
+		<authentication-provider user-service-ref="userDetailsService" />
 		<authentication-provider ref="authProvider" />
 	</authentication-manager>
 
 
-	<b:bean id="memberService" class="com.ktcu.login.security.UserDetailsServiceImpl" />
+	<!--<b:bean id="memberService" class="com.ktcu.login.security.UserDetailsServiceImpl" />-->
 	<!--<b:bean class="com.ktcu.login.security.LoginSuceessListener" />-->
 	<!--<b:bean id="authProvider" class="com.ktcu.login.security.AuthenticationProviderImpl" />-->
 	<!--<b:bean id="authSuccessHandler" class="com.ktcu.login.security.AuthenticationSuccessHandler" />-->

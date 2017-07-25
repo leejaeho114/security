@@ -1,6 +1,7 @@
 package com.ktcu.login.security;
 
 import com.ktcu.login.domain.LoginUser;
+import com.ktcu.login.security.exception.LoginFailCountException;
 import com.ktcu.member.model.UserVo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,24 +21,30 @@ import java.util.Collection;
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+
+		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 		//todo DB select
-		UserVo userVO = new UserVo().getTobeUserVo();
+
+		//??
+		//UserVo userVO = new UserVo().getTobeUserVo();
+
+		//5? ?????
+		UserVo userVO = new UserVo().getTobeUserFailCountVo();
 
 		if(!userVO.getId().equals(username)){
 			throw new UsernameNotFoundException("id & password is not correct");
 		}
 
 		if(userVO.getLoginFailCnt() == 5){
-			//throw new UsernameNotFoundException("id & password is not correct");
+			throw new LoginFailCountException("id & password is not correct");
 		}
 
 		if(userVO.getAsisId() != null){
 			throw new UsernameNotFoundException("id & password is not correct");
 		}
 
-		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
 		//LoginUser user = new LoginUser(userVO.getId(), userVO.getPassword(), authorities);

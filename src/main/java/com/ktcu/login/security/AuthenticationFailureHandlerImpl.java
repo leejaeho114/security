@@ -32,12 +32,12 @@ public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHa
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 		String url = "/login";
 
-		HttpSession session = request.getSession(false);
+		/*HttpSession session = request.getSession(false);
 		if(session != null) {
 			session.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, exception.getMessage());
 		}
 
-		session.setAttribute("loginFailCnt", 5);
+		session.setAttribute("loginFailCnt", 5);*/
 
 
 		//UserVo userVo = UserVo.getUserVo();

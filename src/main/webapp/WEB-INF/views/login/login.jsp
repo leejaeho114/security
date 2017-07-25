@@ -5,7 +5,6 @@
 <html lang="ko">
 <head>
 	<title>Please Login</title>
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <body >
@@ -33,9 +32,10 @@
 					</div>
 				</div>
 
-
-				<img src="<c:url value="simpleCaptcha.png" />"><br />
+				<c:if test="${4 < sessionScope.loginFailCnt}">
+				<img src="<c:url value="stickyCaptcha.png" />"><br />
 				Answer: <input name="answer" /><input type="submit" />
+				</c:if>
 
 				<div class="btn btn-custom-primary btn-lg btn-block btn-auth"  onclick="login();"><i class="fa fa-arrow-circle-o-right"></i> Login</div>
 
@@ -47,6 +47,7 @@
 	</div>
 </div>
 
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	<c:if test="${null != SPRING_SECURITY_LAST_EXCEPTION && '' != SPRING_SECURITY_LAST_EXCEPTION}">
 	alert('${SPRING_SECURITY_LAST_EXCEPTION}');
