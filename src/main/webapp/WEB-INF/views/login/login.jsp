@@ -32,6 +32,11 @@
 						</div>
 					</div>
 				</div>
+
+
+				<img src="<c:url value="simpleCaptcha.png" />"><br />
+				Answer: <input name="answer" /><input type="submit" />
+
 				<div class="btn btn-custom-primary btn-lg btn-block btn-auth"  onclick="login();"><i class="fa fa-arrow-circle-o-right"></i> Login</div>
 
 				<input type="hidden"  name="remember-me" value="true" />
