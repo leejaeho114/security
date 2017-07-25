@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
+ * ???? ??
  * Created by LG on 2017-07-24.
  */
 @Component("authProvider")
@@ -37,10 +38,10 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 
 			if(user == null) {
 				logger.debug(user.getUsername());
-				throw new UsernameNotFoundException("???? ????? ???? ?? ???? ???.");
+				throw new UsernameNotFoundException("id & password is not correct");
 			}
 
-			/* todo ??? ?? ?? ??
+			/* todo password encrypt
 			String encPassword = ssha.createDigest(ssha.getCommonSalt(), password);
 			if (!encPassword.equals(user.getPassword())) {
 				logger.debug(user.getPassword());
@@ -50,7 +51,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 			String encPassword = password;
 			if (!encPassword.equals(user.getPassword())) {
 				logger.debug(user.getPassword());
-				throw new UsernameNotFoundException("???? ????? ???? ?? ???? ???.");
+				throw new UsernameNotFoundException("id & password is not correct");
 			}
 		}
 		return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());

@@ -35,7 +35,7 @@
 				<div class="btn btn-custom-primary btn-lg btn-block btn-auth"  onclick="login();"><i class="fa fa-arrow-circle-o-right"></i> Login</div>
 
 				<input type="hidden"  name="remember-me" value="true" />
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 			</form>
 
 		</div>
