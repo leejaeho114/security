@@ -17,7 +17,7 @@
 					<label for="id" class="control-label sr-only">id</label>
 					<div class="col-sm-12">
 						<div class="input-group">
-							<input type="text" placeholder="아이디" name="id"  id="id" class="form-control" onkeypress="if (event.keyCode==13) login();">
+							<input type="text" placeholder="아이디" name="id"  id="id" class="form-control" onkeypress="if (event.keyCode==13) ajaxLogin();">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
 						</div>
 					</div>
@@ -105,6 +105,9 @@
 		}
 		return true;
 	}
+
+	$("#id").focus();
+
 </script>
 </body>
 </html>

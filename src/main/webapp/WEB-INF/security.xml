@@ -22,14 +22,11 @@
 					password-parameter="password"
 					login-processing-url="/login/authenticate"
 					authentication-success-handler-ref="authSuccessHandler"
-
+					authentication-failure-handler-ref="authFailureHandler"
 		/>
-		<!--authentication-failure-handler-ref="authFailureHandler"-->
-
 
 		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login"  />
 
-		<!--<custom-filter ref="loginFailCheckFilter" after="PRE_AUTH_FILTER" />-->
 		<custom-filter ref="captchaAuthFilter" after="PRE_AUTH_FILTER" />
 	</http>
 

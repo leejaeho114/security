@@ -14,7 +14,12 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public void updateLoginFailCnt(UserVo userVo) {
+		updateLoginFailCnt(userVo, userVo.getLoginFailCnt()+1);
+	}
+
+	@Override
+	public void updateLoginFailCnt(UserVo userVo, int cnt) {
 		LoginDao loginDao = new LoginDao();
-		loginDao.updateLoginFailCnt(userVo);
+		loginDao.updateLoginFailCnt(userVo, cnt);
 	}
 }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 
 public class LoginDao {
-	public void updateLoginFailCnt(UserVo userVo){
-		int loginFailCnt = userVo.getLoginFailCnt();
-		userVo.setLoginFailCnt(++loginFailCnt);
+	public void updateLoginFailCnt(UserVo userVo, int cnt){
+		//int loginFailCnt = userVo.getLoginFailCnt();
+		userVo.setLoginFailCnt(cnt);
 	}
 }

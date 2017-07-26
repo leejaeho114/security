@@ -30,11 +30,10 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 		//LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		//todo login count reset
-		loginService.updateLoginFailCnt(UserVo.getUserVo());
+		loginService.updateLoginFailCnt(UserVo.getUserVo(), 0);
 
 		//todo ip check
 
-		setDefaultTargetUrl("/index");
 		//super.onAuthenticationSuccess(request, response, authentication);
 		LoginResult resultVo = new LoginResult();
 

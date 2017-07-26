@@ -31,7 +31,7 @@ public class CaptchaAuthFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
- 		String id = request.getParameter("id");
+		String id = request.getParameter("id");
 		boolean isNextFilterChain = true;
 
 		if(id != null){

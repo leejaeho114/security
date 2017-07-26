@@ -1,6 +1,8 @@
 package com.ktcu.login.security;
 
 import com.ktcu.login.domain.LoginUser;
+import com.ktcu.login.security.exception.TobeUserPasswordFailureException;
+import com.ktcu.login.service.LoginService;
 import com.ktcu.member.model.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,9 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private LoginService loginService;
+
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String userName = authentication.getName();
@@ -35,6 +40,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 		if(userDetails != null) {
 			user = (LoginUser)userDetails;
+			UserVo userVo = user.getUserVo();
 
 			if(user == null) {
 				logger.debug(user.getUsername());
@@ -51,7 +57,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 			String encPassword = password;
 			if (!encPassword.equals(user.getPassword())) {
 				logger.debug(user.getPassword());
-				throw new UsernameNotFoundException("id & password is not correct");
+				throw new TobeUserPasswordFailureException("id & password is not correct", userVo);
 			}
 		}
 		return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
