@@ -7,6 +7,7 @@ import com.ktcu.login.service.LoginService;
 import com.ktcu.member.model.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 
 /**
  * Created by LG on 2017-07-25.
@@ -27,7 +29,13 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 	@Autowired LoginService loginService;
 
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-		//LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		loginUser.getUserVo();
+
+		Collection authorities = authentication.getAuthorities();
+		/*boolean tobeAuthorized = authorities.contains(new SimpleGrantedAuthority("ROLE_USER"));*/
+		boolean asisAuthorized = authorities.contains(new SimpleGrantedAuthority("ROLE_ASIS_USER"));
+		String returnUrl = asisAuthorized ? "/asisIndex" : "index";
 
 		//todo login count reset
 		loginService.updateLoginFailCnt(UserVo.getUserVo(), 0);
@@ -39,7 +47,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 
 		resultVo.setCode("200");
 		resultVo.setMessage("login success.");
-		resultVo.setReturnUrl("/index");
+		resultVo.setReturnUrl(returnUrl);
 
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();

@@ -1,6 +1,7 @@
 package com.ktcu.login.security;
 
 import com.ktcu.login.domain.LoginUser;
+import com.ktcu.login.security.exception.AsisUserPasswordFailureException;
 import com.ktcu.login.security.exception.TobeUserPasswordFailureException;
 import com.ktcu.login.service.LoginService;
 import com.ktcu.member.model.UserVo;
@@ -55,9 +56,13 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 			}*/
 
 			String encPassword = password;
-			if (!encPassword.equals(user.getPassword())) {
+			if (userVo.isTobeUser() && !encPassword.equals(user.getPassword())) {
 				logger.debug(user.getPassword());
 				throw new TobeUserPasswordFailureException("id & password is not correct", userVo);
+
+			}else if (!userVo.isTobeUser() && !encPassword.equals(user.getPassword())) {
+				logger.debug(user.getPassword());
+				throw new AsisUserPasswordFailureException("id & password is not correct", userVo);
 			}
 		}
 		return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());

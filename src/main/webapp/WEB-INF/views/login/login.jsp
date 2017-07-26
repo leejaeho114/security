@@ -17,7 +17,7 @@
 					<label for="id" class="control-label sr-only">id</label>
 					<div class="col-sm-12">
 						<div class="input-group">
-							<input type="text" placeholder="아이디" name="id"  id="id" class="form-control" onkeypress="if (event.keyCode==13) ajaxLogin();">
+							<input type="text" placeholder="아이디" name="id"  id="id" class="form-control" onkeypress="if (event.keyCode==13) ajaxLogin();" value="leejaeho114">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<div class="col-sm-12">
 						<div class="input-group">
-							<input type="password" placeholder="비밀번호" name="password" id="password" title="비밀번호 입력" class="form-control" onkeypress="if (event.keyCode==13) login();">
+							<input type="password" placeholder="비밀번호" name="password" id="password" title="비밀번호 입력" class="form-control" onkeypress="if (event.keyCode==13) login();" value="1234">
 							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 						</div>
 					</div>
