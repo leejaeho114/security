@@ -1,7 +1,6 @@
 package com.ktcu.login.security;
 
 import com.ktcu.login.domain.LoginUser;
-import com.ktcu.login.security.exception.LoginFailCountException;
 import com.ktcu.member.model.UserVo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,27 +27,27 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		//todo DB select
 
 		//??
-		//UserVo userVO = new UserVo().getTobeUserVo();
+//		UserVo userVO = new UserVo().getTobeUserVo();
 
 		//5? ?????
 		UserVo userVO = new UserVo().getTobeUserFailCountVo();
 
-		if(!userVO.getId().equals(username)){
+		/*if(!userVO.getId().equals(username)){
 			throw new UsernameNotFoundException("id & password is not correct");
-		}
+		}*/
 
-		if(userVO.getLoginFailCnt() == 5){
+		//if(userVO.getLoginFailCnt() == 5){
 			//throw new LoginFailCountException("id & password is not correct");
-		}
+		//}
 
-		if(userVO.getAsisId() != null){
+		/*if(userVO.getAsisId() != null){
 			throw new UsernameNotFoundException("id & password is not correct");
-		}
+		}*/
 
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+ 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-		//LoginUser user = new LoginUser(userVO.getId(), userVO.getPassword(), authorities);
-		LoginUser user = new LoginUser(userVO.getId(), userVO.getPassword(), true, true, true, true, authorities);
+		LoginUser user = new LoginUser(userVO.getId(), userVO.getPassword(), authorities);
+		//LoginUser user = new LoginUser(userVO.getId(), userVO.getPassword(), true, true, true, true, authorities);
 		user.setUserVo(userVO);
 
 		return user;

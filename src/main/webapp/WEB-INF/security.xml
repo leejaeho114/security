@@ -21,7 +21,6 @@
 					username-parameter="id"
 					password-parameter="password"
 					login-processing-url="/login/authenticate"
-					authentication-failure-url="/login"
 					authentication-success-handler-ref="authSuccessHandler"
 
 		/>
@@ -30,18 +29,13 @@
 
 		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login"  />
 
-		<custom-filter ref="captchaAuthFilter" before="FORM_LOGIN_FILTER" />
+		<!--<custom-filter ref="loginFailCheckFilter" after="PRE_AUTH_FILTER" />-->
+		<custom-filter ref="captchaAuthFilter" after="PRE_AUTH_FILTER" />
 	</http>
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="userDetailsService" />
 		<authentication-provider ref="authProvider" />
 	</authentication-manager>
-
-	<b:bean id="captchaAuthFilter" class="com.ktcu.login.security.filter.CaptchaAuthFilter" />
-	<!--<b:bean id="memberService" class="com.ktcu.login.security.UserDetailsServiceImpl" />-->
-	<!--<b:bean class="com.ktcu.login.security.LoginSuceessListener" />-->
-	<!--<b:bean id="authProvider" class="com.ktcu.login.security.AuthenticationProviderImpl" />-->
-	<!--<b:bean id="authSuccessHandler" class="com.ktcu.login.security.AuthenticationSuccessHandler" />-->
 
 </b:beans>

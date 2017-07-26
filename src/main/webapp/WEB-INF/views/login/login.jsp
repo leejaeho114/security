@@ -33,11 +33,21 @@
 				</div>
 
 				<c:if test="${4 < sessionScope.loginFailCnt}">
-				<img src="<c:url value="stickyCaptcha.png" />"><br />
-				Answer: <input name="captchaCode" /><input type="submit" />
+					비밀번호 오류 횟수 : ${sessionScope.loginFailCnt}<br />
+					<img src="<c:url value="stickyCaptcha.png" />"><br />
+					<input name="answer" placeholder="캡차코드" />
 				</c:if>
 
-				<div class="btn btn-custom-primary btn-lg btn-block btn-auth"  onclick="login();"><i class="fa fa-arrow-circle-o-right"></i> Login</div>
+				<%--<a href="javascript://" onclick="login();">
+					<div class="btn btn-custom-primary btn-lg btn-block btn-auth"><i class="fa fa-arrow-circle-o-right"></i> Login</div>
+				</a>--%>
+
+				<a href="javascript://" onclick="ajaxLogin();">
+					<div class="btn btn-custom-primary btn-lg btn-block btn-auth"><i class="fa fa-arrow-circle-o-right"></i>ajax Login</div>
+				</a>
+				<a href="/logout">
+					<div class="btn btn-custom-primary btn-lg btn-block btn-auth"><i class="fa fa-arrow-circle-o-right"></i>logout</div>
+				</a>
 
 				<input type="hidden"  name="remember-me" value="true" />
 				<%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
@@ -55,9 +65,46 @@
 	<c:remove var = "SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
 
 	function login() {
-		$('#loginfrm').submit();
+		if(validate()) {
+			$('#loginfrm').submit();
+		}
 	}
 
+	function ajaxLogin(){
+		if(validate()) {
+			$.ajax({
+				type: "POST",
+				url: "/login/authenticate",
+				dataType: "json",
+				data: $("#loginfrm").serialize(),
+				success: function (result) {
+					console.log(result);
+					alert(result.message);
+					if(result.returnUrl != undefined){
+						location.href = result.returnUrl;
+					}
+
+				}, error: function (xhr, textStatus) {
+					alert(xhr.status + " 오류가 발생했습니다.");
+				}
+			});
+		}
+	}
+
+	function validate(){
+		var id = $("#id").val();
+		if(0 == id.length){
+			alert('아이디를 입력해주세요.');
+			return false;
+		}
+
+		var password = $("#password").val();
+		if(0 == password.length){
+			alert('비밀번호를 입력해주세요.');
+			return false;
+		}
+		return true;
+	}
 </script>
 </body>
 </html>
