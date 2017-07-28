@@ -51,17 +51,7 @@ public class CaptchaAuthFilter extends OncePerRequestFilter{
 						isNextFilterChain = false;
 						//response.sendRedirect("/login");
 
-						LoginResult resultVo = new LoginResult();
-
-						resultVo.setCode("400");
-						resultVo.setMessage("need captcha.");
-						resultVo.setReturnUrl("/login");
-
-						Gson gson = new Gson();
-						PrintWriter out = response.getWriter();
-						out.print(gson.toJson(resultVo));
-						out.flush();
-						out.close();
+						     
 
 					}else{
 						String answer = request.getParameter("answer");

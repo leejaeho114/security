@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by LG on 2017-07-24.
  */
 @Controller
-@Secured(value = "ROLE_USER")
 public class MainController {
 
 	@Secured("ROLE_USER")

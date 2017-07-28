@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		//todo DB select
 		UserVo userVO = new UserVo().getTobeUserVo();
 		//userVO = new UserVo().getTobeUserFailCountVo();
-		userVO = new UserVo().getAsisUserVo();
+		//userVO = new UserVo().getAsisUserVo();
 
 		if(userVO == null){
 			throw new UsernameNotFoundException("id & password is not correct");

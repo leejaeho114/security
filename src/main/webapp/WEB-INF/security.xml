@@ -3,11 +3,16 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xmlns:context="http://www.springframework.org/schema/context"
 		 xmlns:security="http://www.springframework.org/schema/security"
+		 xmlns:mvc="http://www.springframework.org/schema/mvc"
 		 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<!--need @Secured annotation-->
+	<security:global-method-security secured-annotations="enabled" />
+	<mvc:annotation-driven />
+
+	<!--need bean create-->
 	<context:component-scan base-package="com.ktcu.**" />
-	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 
 	<http auto-config="true" use-expressions="true">
 		<security:csrf disabled="true" />
@@ -16,8 +21,6 @@
 		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/stickyCaptcha" access="permitAll" />
 		<intercept-url pattern="/stickyCaptcha.png" access="permitAll" />
-		<intercept-url pattern="/asisIndex" access="hasAnyRole('ROLE_ASIS_USER')" />
-		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')" />
 
 		<form-login login-page="/login"
 					username-parameter="id"
@@ -30,6 +33,10 @@
 		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login"  />
 
 		<custom-filter ref="captchaAuthFilter" after="PRE_AUTH_FILTER" />
+
+		<session-management>
+			<concurrency-control max-sessions="1" />
+		</session-management>
 	</http>
 
 	<authentication-manager>
